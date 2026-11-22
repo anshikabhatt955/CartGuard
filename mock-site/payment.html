@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment & Settlement - MegaStore</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="brand">
+      <span>⚡</span> FlashDeals India
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Listing</a>
+      <a href="cart.html">Cart</a>
+      <a href="payment.html" style="color: #38bdf8; font-weight: bold;">Payment</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="steps-bar">
+      <span class="step-indicator">1. Product Page</span>
+      <span class="step-indicator">2. Cart</span>
+      <span class="step-indicator active">3. Final Payment</span>
+    </div>
+
+    <!-- Countdown timer that restarts on reload -->
+    <div class="timer-banner" id="pay-timer-banner">
+      <span>🔒 Payment Gateway Reserved:</span>
+      <span id="pay-timer" style="font-family: monospace; font-size: 1.15rem; font-weight: 800;">08:00</span>
+    </div>
+
+    <h2 style="font-size: 1.25rem; margin-bottom: 16px;">Final Payment Summary</h2>
+
+    <!-- Optional Add-on at Payment (User CAN untick) -->
+    <div style="margin-bottom: 18px;">
+      <label class="addon-row" for="addon-tree" style="border-color: #3b82f6;">
+        <div class="addon-left">
+          <input type="checkbox" id="addon-tree" checked onchange="updatePaymentTotal()">
+          <div>
+            <div style="font-weight: 600;">Green Planet Tree Pledge (Optional)</div>
+            <div style="font-size: 0.8rem; color: #94a3b8;">Voluntary contribution towards zero-carbon delivery</div>
+          </div>
+        </div>
+        <div class="addon-cost">₹20</div>
+      </label>
+    </div>
+
+    <!-- Price Breakdown showing Mandatory Hidden Fees that appear ONLY on Payment -->
+    <div class="price-summary" style="margin-top: 0;">
+      <div class="summary-line">
+        <span>Cart Items Subtotal</span>
+        <span>₹676</span>
+      </div>
+
+      <!-- Trap: Mandatory Hidden Convenience Fee (No checkbox!) -->
+      <div class="summary-line mandatory-fee" id="fee-convenience">
+        <span>Digital Convenience Fee (Payment surcharge)</span>
+        <span style="font-weight: 700;">₹60</span>
+      </div>
+
+      <!-- Trap: Mandatory Hidden Platform Fee (No checkbox!) -->
+      <div class="summary-line mandatory-fee" id="fee-platform">
+        <span>Platform Service Fee</span>
+        <span style="font-weight: 700;">₹40</span>
+      </div>
+
+      <div class="summary-line" id="line-optional-pledge">
+        <span>Voluntary Green Pledge</span>
+        <span id="pledge-cost-display">₹20</span>
+      </div>
+
+      <div class="summary-total">
+        <span>Total Payable Amount</span>
+        <span id="final-total-display" style="color: #38bdf8;">₹796</span>
+      </div>
+    </div>
+
+    <!-- Trap: Trick question checkbox -->
+    <div style="background: #0f172a; padding: 12px 16px; border-radius: 8px; border: 1px solid #334155; margin: 20px 0 16px 0;">
+      <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.82rem; color: #cbd5e1;">
+        <input type="checkbox" id="trick-checkbox-payment" checked style="width: 16px; height: 16px; accent-color: #38bdf8;">
+        <span>Do not uncheck if you don't wish to opt out of exclusive cashback rewards</span>
+      </label>
+    </div>
+
+    <!-- Trap: Interface interference (Huge green Pay button vs tiny grey skip button) -->
+    <div style="text-align: center; margin-top: 14px;">
+      <button class="accept-btn" id="btn-pay-now" onclick="alert('Payment simulated successfully! CartGuard protected your purchase.')">
+        PAY ₹796 SECURELY VIA UPI / CARD
+      </button>
+
+      <button class="decline-btn-tiny" id="btn-skip-security" onclick="alert('Skipped secure portal')">
+        pay without buyer protection guarantee
+      </button>
+
+      <!-- Trap: Confirmshaming button -->
+      <button class="confirmshame-btn" id="confirmshame-payment" onclick="alert('Dismissed')">
+        No, I don't want to save money
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Countdown timer that restarts to 08:00 on reload
+    let paySeconds = 480;
+    const payTimerEl = document.getElementById('pay-timer');
+    function tickPay() {
+      const m = Math.floor(paySeconds / 60);
+      const s = paySeconds % 60;
+      payTimerEl.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      if (paySeconds > 0) paySeconds--;
+    }
+    setInterval(tickPay, 1000);
+    tickPay();
+
+    function updatePaymentTotal() {
+      const baseWithFees = 676 + 60 + 40; // 776
+      const pledge = document.getElementById('addon-tree');
+      const isPledged = pledge && pledge.checked;
+      const pledgeVal = isPledged ? 20 : 0;
+      
+      document.getElementById('pledge-cost-display').innerText = `₹${pledgeVal}`;
+      const finalVal = baseWithFees + pledgeVal;
+      document.getElementById('final-total-display').innerText = `₹${finalVal}`;
+      document.getElementById('btn-pay-now').innerText = `PAY ₹${finalVal} SECURELY VIA UPI / CARD`;
+    }
+  </script>
+</body>
+</html>

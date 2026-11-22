@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AeroPulse Pro Earbuds - MegaStore</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="brand">
+      <span>⚡</span> FlashDeals India
+    </div>
+    <div class="nav-links">
+      <a href="index.html" style="color: #38bdf8; font-weight: bold;">Listing (₹499)</a>
+      <a href="cart.html">Cart</a>
+      <a href="payment.html">Payment</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="steps-bar">
+      <span class="step-indicator active">1. Product Page (₹499)</span>
+      <span class="step-indicator">2. Cart</span>
+      <span class="step-indicator">3. Payment</span>
+    </div>
+
+    <!-- Trap 1: Countdown timer that restarts on reload -->
+    <div class="timer-banner" id="countdown-banner">
+      <span>⏳ Flash Deal Ends in:</span>
+      <span id="timer-display" style="font-family: monospace; font-size: 1.15rem; font-weight: 800;">04:59</span>
+    </div>
+
+    <!-- Trap 2: Scarcity text generated with Math.random() -->
+    <div class="scarcity-box" id="scarcity-box">
+      <span>🔥</span>
+      <span>Hurry! Only <strong id="stock-count">2</strong> left in stock at this discounted price!</span>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">🎧</div>
+      <div class="product-info">
+        <h2>AeroPulse Pro True Wireless Earbuds</h2>
+        <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 8px;">Bluetooth 5.3 • 30h Playtime • Deep Bass</p>
+        <div class="product-price">
+          ₹499 <span class="original-price">₹1,999</span>
+        </div>
+        <p style="color: #10b981; font-size: 0.85rem; font-weight: 600;">75% OFF today only</p>
+      </div>
+    </div>
+
+    <!-- Trap 3: Trick-question checkbox: double-negative -->
+    <div style="background: #0f172a; padding: 14px 16px; border-radius: 8px; border: 1px solid #334155; margin-bottom: 18px;">
+      <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.85rem; color: #cbd5e1;">
+        <input type="checkbox" id="trick-checkbox-newsletter" checked style="width: 16px; height: 16px; accent-color: #38bdf8;">
+        <span>Don't un-subscribe me from offers and marketing updates</span>
+      </label>
+    </div>
+
+    <!-- Trap 4: Interface interference: Big green accept button vs tiny grey decline button -->
+    <div style="background: rgba(16, 185, 129, 0.08); border: 1px dashed #10b981; padding: 18px; border-radius: 12px; text-align: center; margin-bottom: 18px;">
+      <div style="font-size: 0.95rem; font-weight: 700; color: #a7f3d0; margin-bottom: 6px;">
+        Special VIP Member Discount: Get Extra ₹50 OFF!
+      </div>
+      
+      <!-- Big green accept button -->
+      <a href="cart.html" class="accept-btn" id="vip-accept-btn">
+        ACCEPT VIP DISCOUNT & ADD TO CART (₹499)
+      </a>
+
+      <!-- Tiny grey decline button -->
+      <button class="decline-btn-tiny" id="vip-decline-btn" onclick="alert('Offer declined')">
+        decline discount
+      </button>
+
+      <!-- Trap 5: Confirmshaming button -->
+      <button class="confirmshame-btn" id="confirmshame-listing" onclick="window.location.href='cart.html'">
+        No, I don't want to save money
+      </button>
+    </div>
+  </div>
+
+  <!-- Trap 6: Repeating fake social proof popup -->
+  <div id="social-toast" class="social-proof-toast" style="opacity: 0; transform: translateY(20px); pointer-events: none;">
+    <div class="avatar">R</div>
+    <div>
+      <div style="font-weight: 700; color: #f8fafc;" id="toast-title">Rahul from Pune</div>
+      <div style="color: #94a3b8; font-size: 0.75rem;" id="toast-time">just bought AeroPulse Pro Earbuds (12 seconds ago)</div>
+    </div>
+  </div>
+
+  <script>
+    // 1. Math.random() for "Only N left!"
+    const randomCount = Math.floor(Math.random() * 2) + 2; // 2 or 3
+    document.getElementById('stock-count').innerText = randomCount;
+
+    // 2. Countdown timer that restarts to 04:59 on reload
+    let remaining = 299;
+    const timerDisplay = document.getElementById('timer-display');
+    function updateTimer() {
+      const m = Math.floor(remaining / 60);
+      const s = remaining % 60;
+      timerDisplay.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      if (remaining > 0) remaining--;
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // 3. Repeating "Rahul from Pune just bought this" popup
+    const buyers = [
+      { name: "Rahul", city: "Pune", time: "14 seconds ago" },
+      { name: "Priya", city: "Delhi", time: "28 seconds ago" },
+      { name: "Amit", city: "Bengaluru", time: "just now" },
+      { name: "Sneha", city: "Mumbai", time: "42 seconds ago" }
+    ];
+    let buyerIndex = 0;
+    const toast = document.getElementById('social-toast');
+    const toastTitle = document.getElementById('toast-title');
+    const toastTime = document.getElementById('toast-time');
+
+    function showNextToast() {
+      const buyer = buyers[buyerIndex % buyers.length];
+      toastTitle.innerText = `${buyer.name} from ${buyer.city} just bought this`;
+      toastTime.innerText = buyer.time;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+      buyerIndex++;
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+      }, 4000);
+    }
+
+    // Trigger toast after 1.5s, then repeat every 7 seconds
+    setTimeout(() => {
+      showNextToast();
+      setInterval(showNextToast, 7000);
+    }, 1500);
+  </script>
+</body>
+</html>

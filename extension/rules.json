@@ -1,0 +1,207 @@
+{
+  "version": "1.1.0",
+  "ccpa_reference": "Central Consumer Protection Authority (CCPA) Guidelines for Prevention and Regulation of Dark Patterns, 2023",
+  "stage_rules": {
+    "drip_pricing_allowed_stages": ["cart", "checkout_payment"],
+    "stage_cues": {
+      "checkout_payment": {
+        "url_patterns": ["/checkout", "/payment", "/pay", "payment.html", "order-summary", "placeorder", "review-order"],
+        "dom_keywords": ["place your order", "pay now", "payment method", "complete payment", "total payable", "order summary", "proceed to pay", "pay securely"]
+      },
+      "cart": {
+        "url_patterns": ["/cart", "/viewcart", "basket", "shopping-cart", "cart.html"],
+        "dom_keywords": ["shopping cart", "cart subtotal", "items in your cart", "proceed to checkout", "proceed to buy", "continue to payment"]
+      },
+      "product": {
+        "url_patterns": ["/dp/", "/product/", "/p/", "/item/", "listing.html", "index.html", "product.html"],
+        "dom_keywords": ["add to cart", "buy now", "in stock", "inclusive of all taxes", "m.r.p", "emi starts"]
+      }
+    }
+  },
+  "allowlist_and_ignore": {
+    "ignore_fee_keywords": [
+      "emi",
+      "no cost emi",
+      "emi starts at",
+      "per month",
+      "/month",
+      "/mo",
+      "m.r.p",
+      "mrp",
+      "list price",
+      "discount",
+      "save ₹",
+      "savings",
+      "off",
+      "cashback",
+      "rewards",
+      "inclusive of all taxes",
+      "inclusive of taxes",
+      "taxes included",
+      "gst",
+      "free delivery",
+      "delivery-free",
+      "delivery free",
+      "free shipping"
+    ],
+    "ignore_strike_through_selectors": [
+      "del",
+      "s",
+      "strike",
+      ".original-price",
+      "[style*='line-through']",
+      ".a-text-strike",
+      "._3I9_wc"
+    ],
+    "order_summary_containers": [
+      ".summary-table",
+      ".order-summary",
+      ".price-summary",
+      ".price-breakdown",
+      ".summary-line",
+      "[id*='summary']",
+      "[class*='summary']",
+      "[id*='breakdown']",
+      "[class*='breakdown']",
+      "[id*='price-details']",
+      "[class*='price-details']"
+    ]
+  },
+  "patterns": {
+    "basket_sneaking": {
+      "name": "Basket Sneaking",
+      "ccpa_section": "Guideline 4(b)",
+      "description": "Possible inclusion of additional items, services, or donations without explicit consent.",
+      "severity_score": 25,
+      "currency_symbols": ["₹", "Rs.", "Rs", "INR"],
+      "rupee_regex": "(?:₹|Rs\\.?|INR|\\u20B9)\\s*([\\d,]+(?:\\.\\d{1,2})?)|([\\d,]+(?:\\.\\d{1,2})?)\\s*(?:₹|Rs\\.?|INR|\\u20B9)"
+    },
+    "drip_pricing": {
+      "name": "Drip Pricing",
+      "ccpa_section": "Guideline 4(e)",
+      "description": "Possible progressive fee disclosure or hidden surcharges added after product selection.",
+      "severity_score": 20,
+      "fee_keywords": [
+        "convenience fee",
+        "convenience charge",
+        "convenience",
+        "platform fee",
+        "platform charge",
+        "platform service fee",
+        "platform",
+        "handling fee",
+        "handling charge",
+        "handling",
+        "surcharge",
+        "processing fee",
+        "processing charge",
+        "processing",
+        "gateway fee",
+        "gateway charge",
+        "service fee",
+        "secured packaging fee",
+        "packaging fee",
+        "packaging charge",
+        "protect promise fee",
+        "open box delivery fee",
+        "delivery surcharge"
+      ]
+    },
+    "confirmshaming": {
+      "name": "Confirm Shaming",
+      "ccpa_section": "Guideline 4(c)",
+      "description": "Possible guilt-trip phrasing creating fear, shame, or ridicule to influence user choices.",
+      "severity_score": 15,
+      "keywords": [
+        "no, i don't want to save money",
+        "no, i dont want to save money",
+        "no, i do not want to save money",
+        "no, i don't want to save",
+        "no, i hate discounts",
+        "no, i hate saving",
+        "no thanks, i'll pay full price",
+        "no thanks, i will pay full price",
+        "no, i prefer paying full price",
+        "no, i prefer paying more",
+        "i'll risk it",
+        "i will risk it",
+        "no, skip protection",
+        "no, i don't care about protection",
+        "no, i dont need warranty",
+        "no, i don't want to protect",
+        "no, i dont want to protect",
+        "no, i like paying more",
+        "decline discount",
+        "decline protection",
+        "pay without buyer protection",
+        "i'll take my chances",
+        "no, i don't deserve this discount",
+        "skip & continue",
+        "skip and continue"
+      ]
+    },
+    "trick_questions": {
+      "name": "Trick Questions",
+      "ccpa_section": "Guideline 4(j)",
+      "description": "Possible confusing, double-negative phrasing misleading user consent.",
+      "severity_score": 15,
+      "double_negative_regexes": [
+        "don'?t\\s+un-?subscribe",
+        "do\\s+not\\s+un-?subscribe",
+        "do\\s+not\\s+uncheck",
+        "don'?t\\s+uncheck",
+        "uncheck\\s+if\\s+you\\s+(?:do\\s+not|don'?t)\\s+wish",
+        "uncheck\\s+to\\s+not\\s+receive",
+        "do\\s+not\\s+opt\\s+out",
+        "don'?t\\s+wish\\s+to\\s+opt\\s+out",
+        "avoid\\s+missing",
+        "prevent\\s+cancellation"
+      ]
+    },
+    "disguised_ads": {
+      "name": "Disguised Advertisement",
+      "ccpa_section": "Guideline 4(f)",
+      "description": "Possible commercial endorsement masked to resemble organic cart items.",
+      "severity_score": 15,
+      "sponsored_keywords": [
+        "sponsored",
+        "promoted",
+        "advertisement",
+        "ad:",
+        "ad •",
+        "recommended partner",
+        "paid partner"
+      ]
+    },
+    "interface_interference": {
+      "name": "Interface Interference",
+      "ccpa_section": "Guideline 4(g)",
+      "description": "Possible visual asymmetry or manipulation obscuring genuine consumer choices.",
+      "severity_score": 15,
+      "contrast_ratio_threshold": 3.0,
+      "area_ratio_threshold": 4.0,
+      "tiny_font_threshold_px": 11
+    },
+    "false_urgency": {
+      "name": "False Urgency",
+      "ccpa_section": "Guideline 4(a)",
+      "description": "Possible artificial urgency or misleading scarcity pressure.",
+      "severity_score": 15,
+      "scarcity_patterns": [
+        "(?:only|just)\\s+(\\d+)\\s+(?:left|remaining|in\\s+stock)",
+        "hurry[!,\\s]+(?:only\\s+)?(?:a\\s+few|\\d+)\\s+left",
+        "(\\d+)\\s+people\\s+(?:are\\s+)?viewing",
+        "(\\d+)\\s+people\\s+have\\s+this\\s+in\\s+(?:their\\s+)?cart",
+        "deal\\s+ends\\s+in",
+        "lightning\\s+deal",
+        "ends\\s+in\\s+\\d+",
+        "high\\s+demand",
+        "selling\\s+fast"
+      ],
+      "social_proof_patterns": [
+        "([A-Za-z]+)\\s+from\\s+([A-Za-z\\s]+)\\s+just\\s+bought",
+        "recent\\s+purchase\\s+by\\s+([A-Za-z]+)"
+      ]
+    }
+  }
+}

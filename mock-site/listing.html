@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AeroBass Pro Wireless - MegaShop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="nav-header">
+    <div class="brand">
+      <span>🛒</span> MegaShop India
+    </div>
+    <div class="badge-tag">Verified Safe Store</div>
+  </header>
+
+  <div class="container">
+    <div class="stepper">
+      <div class="step-item active">
+        <span class="step-circle">1</span>
+        <span>Product Listing</span>
+      </div>
+      <div class="step-item">
+        <span class="step-circle">2</span>
+        <span>Cart</span>
+      </div>
+      <div class="step-item">
+        <span class="step-circle">3</span>
+        <span>Payment</span>
+      </div>
+    </div>
+
+    <!-- Resetting Timer -->
+    <div class="banner-timer" id="countdown-banner">
+      <span>⏰ Special Deal Expires In:</span>
+      <span id="timer-display" style="font-family: monospace; font-size: 1.15rem; font-weight: bold;">04:59</span>
+    </div>
+
+    <!-- Scarcity pattern text -->
+    <div class="scarcity-banner">
+      <span>🔥</span>
+      <span>Hurry! Only 2 left in stock — 38 people viewing this right now</span>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-img">
+        <span style="font-size: 4rem;">🎧</span>
+        <span style="margin-top: 10px; font-weight: 500;">AeroBass Pro 750</span>
+      </div>
+      <div class="product-details">
+        <h1>AeroBass Pro ANC Wireless Headphones</h1>
+        <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 12px;">Active Noise Cancelling, 40h Battery, Hi-Res Audio</p>
+        
+        <div class="price-tag">
+          ₹2,999 <span class="original-price">₹7,999</span>
+        </div>
+
+        <p style="color: #10b981; font-weight: 600; font-size: 0.9rem; margin-bottom: 20px;">Save 62% if you order before timer runs out!</p>
+
+        <a href="cart.html" class="btn-primary" style="width: 100%;">Add to Cart & Checkout (₹2,999)</a>
+      </div>
+    </div>
+
+    <!-- Confirmshaming trap element -->
+    <div class="confirmshaming-box">
+      <p style="font-size: 0.95rem; font-weight: 600; color: #f8fafc;">Special Welcome Gift: Claim ₹500 Instant Discount Coupon!</p>
+      <div style="margin-top: 10px; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <button class="btn-primary" style="padding: 8px 18px; font-size: 0.9rem;" onclick="alert('Coupon Applied!')">Claim My ₹500 Coupon</button>
+        <button class="confirmshaming-btn" id="shame-reject" onclick="this.parentElement.parentElement.style.display='none'">
+          No, I don't want to save money
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Resetting countdown timer: always resets to 04:59 on reload
+    let totalSeconds = 299; // 4 mins 59 secs
+    const timerEl = document.getElementById('timer-display');
+    
+    function updateTimer() {
+      const mins = Math.floor(totalSeconds / 60);
+      const secs = totalSeconds % 60;
+      timerEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      if (totalSeconds > 0) {
+        totalSeconds--;
+      }
+    }
+    
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+</body>
+</html>

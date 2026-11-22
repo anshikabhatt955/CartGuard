@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "CartGuard",
+  "version": "1.0.0",
+  "description": "On-device dark pattern detection and De-Trap for live checkout pages under CCPA 2023 Guidelines.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    },
+    "default_title": "CartGuard: Checkout Protection"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["rules.json", "icons/icon16.png", "icons/icon48.png"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CartGuard</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <header class="popup-header">
+    <div class="logo">
+      <span class="logo-icon">🛡️</span>
+      <div>
+        <div class="logo-title">CartGuard</div>
+        <div class="logo-tagline">Consumer Protection Shield</div>
+      </div>
+    </div>
+    <div id="live-indicator" class="live-tag">Online Store</div>
+  </header>
+
+  <main class="popup-body">
+    <!-- Store & Product Context Card -->
+    <div id="store-meta-box" class="store-meta-card">
+      <div class="store-top-row">
+        <span id="store-name-badge" class="store-badge">🛍️ Shopping Store</span>
+        <span id="stage-badge" class="stage-badge">Product Page</span>
+      </div>
+      <div id="product-title-display" class="product-title-text">Current Page</div>
+      <div id="product-price-display" class="product-price-tag" style="display: none;"></div>
+    </div>
+
+    <!-- Plain English Verdict Card -->
+    <div id="alert-banner" class="alert-banner clean">
+      <div class="alert-sub" id="alert-sub-display">Price Verdict</div>
+      <div class="alert-amount" id="extra-amount-display">₹0 Extra</div>
+      <div class="alert-desc" id="extra-desc-display">Analyzing current page...</div>
+    </div>
+
+    <!-- One-Tap De-Trap Action -->
+    <div class="detrap-container">
+      <button id="detrap-btn" class="detrap-btn">
+        <span>🛡️</span>
+        <span id="detrap-btn-text">Remove Sneaky Add-ons</span>
+      </button>
+
+      <button id="undo-btn" class="undo-btn" style="display: none;">
+        <span>↩️</span> Put Items Back
+      </button>
+    </div>
+
+    <!-- Mandatory Fees Alert -->
+    <div id="mandatory-warning" class="mandatory-warning-box" style="display: none;">
+      <span class="warning-icon">⚠️</span>
+      <div>
+        <strong>Merchant-Enforced Fee:</strong> This extra fee is mandatory by store policy and cannot be auto-unticked. It is outlined in red on your screen.
+      </div>
+    </div>
+
+    <!-- Section Title -->
+    <div class="section-title">
+      <span>What Was Scanned on this Page</span>
+      <span id="findings-count-badge" class="count-badge">0</span>
+    </div>
+
+    <!-- Findings List -->
+    <div id="findings-list" class="findings-list">
+      <div class="empty-state" id="empty-state">
+        <div style="font-size: 2rem; margin-bottom: 8px;">✅</div>
+        <div style="font-weight: 700; color: #34d399;">100% Genuine & Clean Store</div>
+        <div style="color: #94a3b8; font-size: 0.8rem; margin-top: 4px; line-height: 1.4;">
+          No hidden fees, no pre-checked add-ons, and no deceptive buttons found. You only pay the genuine price shown.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="popup-footer">
+    <span>CartGuard • 100% On-Device & Privacy Safe • CCPA 2023 Shield</span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

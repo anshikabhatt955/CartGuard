@@ -1,0 +1,193 @@
+/* CartGuard In-Page Overlay & Badges */
+#cartguard-floating-badge {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 2147483647 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 13px !important;
+  color: #f8fafc !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 16px !important;
+  background: #0f172a !important;
+  border: 1.5px solid #38bdf8 !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7), 0 0 15px rgba(56, 189, 248, 0.3) !important;
+  cursor: pointer !important;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s !important;
+  user-select: none !important;
+  animation: cartguard-slide-in 0.3s ease-out !important;
+}
+
+#cartguard-floating-badge:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 14px 28px -4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 189, 248, 0.45) !important;
+}
+
+#cartguard-floating-badge.cartguard-badge-alert {
+  border-color: #f43f5e !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7), 0 0 18px rgba(244, 63, 94, 0.35) !important;
+}
+
+#cartguard-floating-badge.cartguard-badge-clean {
+  border-color: #10b981 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7), 0 0 15px rgba(16, 185, 129, 0.3) !important;
+}
+
+.cartguard-badge-icon {
+  font-size: 16px !important;
+  line-height: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.cartguard-badge-text {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.cartguard-badge-amount {
+  background: rgba(244, 63, 94, 0.25) !important;
+  color: #fda4af !important;
+  padding: 2px 7px !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+}
+
+.cartguard-badge-btn {
+  background: #38bdf8 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  padding: 4px 10px !important;
+  border-radius: 9999px !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background 0.15s !important;
+  margin-left: 4px !important;
+}
+
+.cartguard-badge-btn:hover {
+  background: #7dd3fc !important;
+}
+
+/* In-Page Slide-out Drawer */
+#cartguard-drawer-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 380px !important;
+  height: 100vh !important;
+  background: #0f172a !important;
+  color: #f8fafc !important;
+  z-index: 2147483647 !important;
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.8) !important;
+  border-left: 1px solid #334155 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  display: flex !important;
+  flex-direction: column !important;
+  animation: cartguard-slide-left 0.25s ease-out !important;
+}
+
+.cartguard-drawer-header {
+  padding: 16px 20px !important;
+  background: #1e293b !important;
+  border-bottom: 1px solid #334155 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.cartguard-drawer-close {
+  background: transparent !important;
+  border: none !important;
+  color: #94a3b8 !important;
+  font-size: 20px !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+}
+
+.cartguard-drawer-close:hover {
+  color: #fff !important;
+}
+
+.cartguard-drawer-content {
+  padding: 16px !important;
+  overflow-y: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  flex: 1 !important;
+}
+
+/* In-Page Element Highlights: OUTLINE ONLY (No stacked banners or badges) */
+.cartguard-highlight-optional {
+  outline: 2px dashed #f59e0b !important;
+  outline-offset: 3px !important;
+}
+
+.cartguard-highlight-mandatory {
+  outline: 2.5px solid #ef4444 !important;
+  outline-offset: 3px !important;
+}
+
+.cartguard-highlight-shame {
+  outline: 2px dotted #ec4899 !important;
+  outline-offset: 2px !important;
+}
+
+.cartguard-highlight-trick {
+  outline: 2px dashed #a855f7 !important;
+  outline-offset: 3px !important;
+}
+
+/* De-trapped banner notification */
+#cartguard-toast {
+  position: fixed !important;
+  bottom: 84px !important;
+  right: 24px !important;
+  background: #1e293b !important;
+  color: #f8fafc !important;
+  border: 1px solid #10b981 !important;
+  padding: 12px 18px !important;
+  border-radius: 12px !important;
+  font-size: 13px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6) !important;
+  z-index: 2147483647 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  animation: cartguard-slide-in 0.25s ease-out !important;
+}
+
+.cartguard-toast-undo {
+  background: transparent !important;
+  border: 1px solid #64748b !important;
+  color: #38bdf8 !important;
+  border-radius: 6px !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+}
+
+.cartguard-toast-undo:hover {
+  background: rgba(56, 189, 248, 0.15) !important;
+}
+
+@keyframes cartguard-slide-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cartguard-slide-left {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
